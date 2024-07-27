@@ -1,0 +1,71 @@
+print("Wellcome to quiz game !!")
+print('Rules:\n1.You have to select from the options only\n2.For each correct answer you will get points.\n3.There is no negative points.')
+import random
+def get_questions():
+    return [
+        {
+            "question": "What is the capital of France?",
+            "options": ["a) Berlin", "b) Madrid", "c) Paris", "d) Rome"],
+            "answer": "c"
+        },
+        {
+            "question": "What is the largest planet in our solar system?",
+            "options": ["a) Earth", "b) Jupiter", "c) Mars", "d) Saturn"],
+            "answer": "b"
+        },
+        {
+            "question": "Who wrote 'To Kill a Mockingbird'?",
+            "options": ["a) Harper Lee", "b) J.K. Rowling", "c) Ernest Hemingway", "d) Mark Twain"],
+            "answer": "a"
+        },
+        {
+            "question": "What is the hardest natural substance on Earth?",
+            "options": ["a) Gold", "b) Iron", "c) Diamond", "d) Platinum"],
+            "answer": "c"
+        },
+        {
+            "question": "Which planet is known as the Red Planet?",
+            "options": ["a) Earth", "b) Mars", "c) Venus", "d) Mercury"],
+            "answer": "b"
+        }
+    ]
+
+def display_question(q):
+    print(q["question"])
+    for option in q["options"]:
+        print(option)
+    
+def get_user_answer():
+    answer = input("Please select the correct option (a/b/c/d): ").strip().lower()
+    while answer not in ['a', 'b', 'c', 'd']:
+        print("Invalid option. Please select a valid option (a/b/c/d).")
+        answer = input("Please select the correct option (a/b/c/d): ").strip().lower()
+    return answer
+
+def run_quiz():
+    questions = get_questions()
+    score = 0
+    random.shuffle(questions)  # Shuffle questions for each game
+
+    for q in questions:
+        display_question(q)
+        user_answer = get_user_answer()
+        if user_answer == q["answer"]:
+            print("Correct!")
+            score += 1
+        else:
+            print(f"Wrong! The correct answer was {q['answer']}.")
+        print()
+    
+    print(f"Quiz finished! Your score is {score}/{len(questions)}.")
+
+def main():
+    while True:
+        run_quiz()
+        play_again = input("Do you want to play again? (yes/no): ").strip().lower()
+        if play_again not in ['yes', 'y']:
+            print("Thank you for playing!")
+            break
+
+if __name__ == "__main__":
+    main()
